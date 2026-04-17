@@ -1,3 +1,17 @@
+# Everything I used
+library(tidyverse)
+library(instaR)
+library(RedditExtractoR)
+library(tm)
+library(tidytext)
+library(dplyr)
+library(stringr)
+library(stm)
+library(ggplot2)
+library(SnowballC)
+library(topicmodels)
+library(devtools)
+library(textnets)
 
 links <- reddit_urls( search_terms   = "ice", page_threshold = 10, sort_by = 'new')
 
@@ -42,7 +56,6 @@ comments_subset$created_at <- paste(comments_subset$date, comments_subset$timest
 find_thread_urls(keywords = "ice", subreddit="conservatives", sort_by="comments", period="day")
 
 reddit_corpus <- Corpus(VectorSource(as.vector(comments_subset$comment)))
-
 reddit_corpus
 
 
@@ -79,13 +92,11 @@ tidy_reddit_corpus_gsub
 
 
 reddit_corpus_stemming <- tm_map(reddit_corpus, content_transformer(stemDocument), language = "english")
-
 reddit_corpus_stemming
 
 tidy_reddit_corpus_mutate<- tidy_reddit_corpus %>%
   mutate_at("word", funs(wordStem ((.), language = "en")))
 tidy_reddit_corpus_mutate
-
 
 reddit_DTM <- DocumentTermMatrix(reddit_corpus, control = list(wordLengths = c(2, Inf)))
 
