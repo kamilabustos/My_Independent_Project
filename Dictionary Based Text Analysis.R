@@ -23,7 +23,6 @@ top_words %>%
   ggtitle("Most Frequent Words in r/Conservatives") +
   guides(fill=FALSE)
 
-#says column "text" doesn't exist
 reddit_tfidf<- tidy_reddit_corpus %>%
   select(created_at,text) %>%
   unnest_tokens("word",text) %>%
@@ -31,13 +30,11 @@ reddit_tfidf<- tidy_reddit_corpus %>%
   count(word, created_at) %>%
   bind_tf_(word, created_at, n)
 
-mynumber<-2+2
 top_tfidf<- tidy_reddit_corpus %>%
   arrange(desc(reddit_tfidf))
 
 
 top_tfidf$word[1]
-
 
 
 conservative_dictionary <- c("ice", "illegals", "law", "federal", "criminals")
